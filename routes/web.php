@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layout/index');
+    return view('welcome');
+});
+
+Route::get('/login', function () {
+    return view('Login.login');
+})->name('login');
+
+Route::post('/postlogin',[LoginController::class, 'postlogin'])->name('postlogin');
+Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
+
+Route::group(['middleware'=>['auth','ceklevel:admin']],function(){
+    Route::get('/index', function () {
+        return view('admin/index');
+    })->name('index');
+
 });
 
 Route::get('/tambahBrg', function () {
@@ -28,3 +43,4 @@ Route::get('/DataBrgMasuk', function () {
 Route::get('/DataBrgKeluar', function () {
     return view('admin/DataBrgKeluar');
 })->name('DataBrgKeluar');
+
