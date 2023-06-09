@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('brg_keluar', function (Blueprint $table) {
+        Schema::create('m__tambah_barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('no_brg_keluar');
-            $table->integer('id_barang');
-            $table->integer('id_user');
-            $table->integer('jml_brg_keluar')->nullable();
-            $table->bigInteger('total')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('brg_keluar');
+        Schema::dropIfExists('m__tambah_barangs');
     }
 };
